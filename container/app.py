@@ -18,24 +18,26 @@ dim = (640, 640)
 dim_show = (1280, 720)
 
 def get_video_frames():
-    cap = cv2.VideoCapture(0)
-    print(cap.isOpened()) # False
-    print(cap.read())
     print("START", file=sys.stdout)
-    if not cap.isOpened():
-        print("Error: Could not open the video device.", file=sys.stdout)
+
+    
+    if cv2.VideoCapture(1).isOpened():
+        cap = cv2.VideoCapture(1)
+    elif cv2.VideoCapture(0).isOpened():
+        cap = cv2.VideoCapture(0)
+    elif cv2.VideoCapture('video.mp4').isOpened():
         cap = cv2.VideoCapture('video.mp4')
-        if not cap.isOpened():
-            print("Error: Could not open video source.", file=sys.stdout)
-            sys.exit
-        else:
-            print("Video MP4 opened.", file=sys.stdout)
     else:
-        print("Camera Video0 Opened", file=sys.stdout)
+        print("No video opened", file=sys.stdout)
+        sys.exit()
+
     fps = cap.get(cv2.CAP_PROP_FPS)
     print(fps)
     print(cap.get(cv2.CAP_PROP_FRAME_COUNT), file=sys.stdout)
     frame_counter= 0
+   
+
+
     while True:
         #time.sleep((1000/fps)/1000)
         # Read a frame from the camera
