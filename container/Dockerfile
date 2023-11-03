@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM quay.io/hgeaydem/ubi9-jp6-pytorch:pytorch-2.1.0 
+FROM quay.io/hgeaydem/ubi9-jp6-pytorch:pytorch-2.1.0
 #FROM fedora:38
 
 # Set the working directory to /app
@@ -22,7 +22,9 @@ ADD static /app/static
 COPY app.py /app/
 COPY best.pt /app/
 
+
 # Define the default command to run when the container starts
 CMD ["python3", "app.py"]
 
 ENTRYPOINT ["python3", "app.py"]
+
