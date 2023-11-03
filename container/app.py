@@ -7,6 +7,15 @@ from flask import Flask, render_template
 import sys
 import time
 import torch
+
+
+import os
+
+external_host = os.environ.get("EXTERNAL_HOST")
+external_port = os.environ.get("EXTERNAL_PORT")
+
+
+
 model = torch.hub.load('yolov5', 'custom', path='best.pt', source='local')
 
 
