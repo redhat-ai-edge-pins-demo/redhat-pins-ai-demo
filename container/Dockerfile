@@ -43,7 +43,7 @@ ENV CUDA_HOME=/usr/cuda
 ENV NVIDIA_VISIBLE_DEVICES=all
 
 # Define the default command to run when the container starts
-CMD ["bash", "~/.bashrc"]
+CMD ["/app/app.py"]
+ENTRYPOINT ["python3"]
 
-ENTRYPOINT ["bash", "-c", "--", "", "while true; do sleep 30; done" ]
 
