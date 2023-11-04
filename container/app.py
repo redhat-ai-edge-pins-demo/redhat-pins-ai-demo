@@ -27,7 +27,7 @@ dim = (640, 640)
 dim_show = (1280, 720)
 
 def get_video_frames():
-    print("START", file=sys.stdout)
+    #print("START", file=sys.stdout)
 
     
     if cv2.VideoCapture(1).isOpened():
@@ -37,12 +37,12 @@ def get_video_frames():
     elif cv2.VideoCapture('video.mp4').isOpened():
         cap = cv2.VideoCapture('video.mp4')
     else:
-        print("No video opened", file=sys.stdout)
+        #print("No video opened", file=sys.stdout)
         sys.exit()
 
     fps = cap.get(cv2.CAP_PROP_FPS)
-    print(fps)
-    print(cap.get(cv2.CAP_PROP_FRAME_COUNT), file=sys.stdout)
+    #print(fps)
+    #print(cap.get(cv2.CAP_PROP_FRAME_COUNT), file=sys.stdout)
     frame_counter= 0
    
 
@@ -54,11 +54,11 @@ def get_video_frames():
         frame_counter += 1
         #If the last frame is reached, reset the capture and the frame_counter
         if frame_counter == cap.get(cv2.CAP_PROP_FRAME_COUNT):
-            print("== last frame ==", file=sys.stdout)
+            #print("== last frame ==", file=sys.stdout)
             frame_counter = 0 #Or whatever as long as it is the same as next line
             cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
         if not ret:
-            print("Error: Could not read a frame.", file=sys.stdout)
+            #print("Error: Could not read a frame.", file=sys.stdout)
             sys.exit
 
         resized = cv2.resize(frame, dim, interpolation = cv2.INTER_AREA)
@@ -67,7 +67,7 @@ def get_video_frames():
             pass
         else:
             for i in results.pandas().xyxy[0]['name']:
-                print(i)
+                #print(i)
         #results.print()
         results_resized = cv2.resize(np.squeeze(results.render()), dim_show, interpolation = cv2.INTER_AREA)
         #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -79,7 +79,7 @@ def get_video_frames():
 
 @sio.on('connect')
 def connect():
-    print('Connected')
+    #print('Connected')
 
 @sio.on('start-task')
 def start_task():
