@@ -22,25 +22,25 @@ ADD static /app/static
 COPY app.py /app/
 COPY best.pt /app/
 
-ENV CONDA_EXE=/opt/conda/bin/conda
-ENV CONDA_PREFIX=/opt/conda
-ENV CONDA_DIR=/opt/conda
-ENV CONDA_PYTHON_EXE=/opt/conda/bin/python
-ENV PATH=/opt/conda/bin:/opt/conda/condabin:/root/.local/bin:/root/bin:/usr/share/Modules/bin:/opt/conda/bin:/usr/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV CONDA_EXE /opt/conda/bin/conda
+ENV CONDA_PREFIX /opt/conda
+ENV CONDA_DIR /opt/conda
+ENV CONDA_PYTHON_EXE /opt/conda/bin/python
+ENV PATH /opt/conda/bin:/opt/conda/condabin:/root/.local/bin:/root/bin:/usr/share/Modules/bin:/opt/conda/bin:/usr/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-ENV MANPATH=/usr/share/man:
-ENV CUDA_PATH=/usr/cuda
-ENV MODULES_RUN_QUARANTINE=LD_LIBRARY_PATH LD_PRELOAD
-ENV LD_LIBRARY_PATH=/lib/usr/cuda/lib64:
-ENV PATH=/opt/conda/bin:/opt/conda/condabin:/root/.local/bin:/root/bin:/usr/share/Modules/bin:/opt/conda/bin:/usr/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-ENV MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles:/usr/share/modulefiles
+ENV MANPATH /usr/share/man:
+ENV CUDA_PATH /usr/cuda
+ENV MODULES_RUN_QUARANTINE LD_LIBRARY_PATH LD_PRELOAD
+ENV LD_LIBRARY_PATH /lib/usr/cuda/lib64:
+ENV PATH /opt/conda/bin:/opt/conda/condabin:/root/.local/bin:/root/bin:/usr/share/Modules/bin:/opt/conda/bin:/usr/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV MODULEPATH /usr/share/Modules/modulefiles:/etc/modulefiles:/usr/share/modulefiles
 
-ENV CUDA_DIR=/usr/cuda
-ENV CUDA_PATH=/usr/cuda
-ENV CUDA_INSTALL_DIR=/usr/cuda
-ENV CUDA_HOME=/usr/cuda
+ENV CUDA_DIR /usr/cuda
+ENV CUDA_PATH /usr/cuda
+ENV CUDA_INSTALL_DIR /usr/cuda
+ENV CUDA_HOME /usr/cuda
 
-ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_VISIBLE_DEVICES all
 
 # Define the default command to run when the container starts
 CMD ["bash", "~/.bashrc"]
