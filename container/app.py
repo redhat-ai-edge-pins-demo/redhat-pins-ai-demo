@@ -80,6 +80,7 @@ def get_video_frames():
 @sio.on('connect')
 def connect():
     #print('Connected')
+    pass
 
 @sio.on('start-task')
 def start_task():
