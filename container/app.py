@@ -67,7 +67,7 @@ def get_video_frames():
             pass
         else:
             for i in results.pandas().xyxy[0]['name']:
-                #print(i)
+                print(i, file=sys.stdout)
         #results.print()
         results_resized = cv2.resize(np.squeeze(results.render()), dim_show, interpolation = cv2.INTER_AREA)
         #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
