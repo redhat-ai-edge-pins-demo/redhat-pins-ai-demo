@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="fr">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Red Hat Computer Vision</title>
-  </head>
-  <body>
-    <div id="container">
+    <title>Red Hat - Accueil</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='stylesheets/styles.css') }}rh_logo_black.svg" alt="Logiciel Red Hat">
+        </div>
+    </header>
+    
+        <div id="container">
         <canvas id="canvasOutput"></canvas>
         <video autoplay="true" id="videoElement"></video>
     </div>
@@ -25,5 +31,23 @@
             image_id.src = image;
         });
     </script>
-  </body>
+
+    <section class="banner">
+        <h2 class="btn" >ONLINE EVENT</h2>
+    </section>
+
+    <section class="main-content">
+        <div class="description">
+            <h1>AI/ML at the Edge: From Data Science to field operational AI</h1>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-media">
+        </div>
+        <div class="contact-info">
+            <p>bertrand.dherouville@redhat.com</p>
+        </div>
+    </footer>
+</body>
 </html>
