@@ -19,11 +19,11 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 2vw 4vw;
 }
 
 .logo img {
-    height: 50px;
+    max-width: 15vw;
 }
 
 nav ul {
@@ -32,7 +32,7 @@ nav ul {
 
 nav ul li {
     display: inline;
-    margin-right: 20px;
+    margin-right: 2vw;
 }
 
 nav a {
@@ -44,33 +44,33 @@ nav a {
     background-image: url('banner-image.jpg');
     background-size: cover;
     text-align: center;
-    padding: 100px 0;
+    padding: 20vh 0;
     color: #fff;
 }
 
 .banner h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
+    font-size: 5vw;
+    margin-bottom: 2vh;
 }
 
 .banner p {
-    font-size: 18px;
-    margin-bottom: 20px;
+    font-size: 2vw;
+    margin-bottom: 2vh;
 }
 
 .btn {
     background-color: #ff0000;
     color: #fff;
-    padding: 10px 20px;
+    padding: 2vh 4vw;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 1vw;
 }
 
 .main-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px;
+    padding: 4vh;
 }
 
 .image img {
@@ -78,21 +78,20 @@ nav a {
 }
 
 .description {
-    margin-left: 40px;
+    margin-left: 4vw;
 }
 
 footer {
     background-color: #000;
     color: #fff;
     text-align: center;
-    padding: 20px 0;
+    padding: 2vh 0;
 }
 
 .social-media a {
-    margin: 0 10px;
+    margin: 0 2vw;
 }
 
 .contact-info p {
-    margin-top: 10px;
+    margin-top: 2vh;
 }
-
