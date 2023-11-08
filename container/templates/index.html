@@ -24,7 +24,7 @@ ai<!DOCTYPE html>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js" integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        var socket = io('http://edgeai.lab.local:30000');
+        var socket = io('http://orin.lab.local:30000');
         socket.on('response_back', function(image){
             const image_id = document.getElementById('image');
             console.log(image)
