@@ -1,4 +1,4 @@
-ai<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -12,12 +12,19 @@ ai<!DOCTYPE html>
             <img src="{{ url_for('static', filename='images/rh_logo_black.svg') }}" alt="Logiciel Red Hat">
         </div>
     </header>
-    
-        <div id="container">
+
+    <section class="banner">
+        <h1>Logiciels Libres pour l'Entreprise</h1>
+        <p>Des solutions innovantes pour les entreprises du monde entier.</p>
+        <a href="#" class="btn">En savoir plus</a>
+    </section>
+
+    <section class="main-content">
+    <div id="container">
         <canvas id="canvasOutput"></canvas>
         <video autoplay="true" id="videoElement"></video>
     </div>
-    
+
     <div class = 'video'>
         <img id="image">
     </div>
@@ -31,15 +38,7 @@ ai<!DOCTYPE html>
             image_id.src = image;
         });
     </script>
-
-    <section class="banner">
-        <h2 class="btn" >ONLINE EVENT</h2>
-    </section>
-
-    <section class="main-content">
-        <div class="description">
-            <h1>AI/ML at the Edge: From Data Science to field operational AI</h1>
-        </div>
+        
     </section>
 
     <footer>
