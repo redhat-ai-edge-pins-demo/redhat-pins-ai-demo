@@ -20,15 +20,9 @@
     </section>
 
     <section class="main-content">
-    <div id="container">
-        <canvas id="canvasOutput"></canvas>
-        <video autoplay="true" id="videoElement"></video>
-    </div>
-
     <div class = 'video'>
         <img id="image">
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js" integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         var socket = io('http://orin.lab.local:30000');
@@ -37,8 +31,7 @@
             console.log(image)
             image_id.src = image;
         });
-    </script>
-        
+    </script>     
     </section>
 
     <footer>
