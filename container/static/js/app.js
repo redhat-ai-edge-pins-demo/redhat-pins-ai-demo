@@ -1,5 +1,5 @@
-// Établir une connexion WebSocket avec le serveur.
-const socket = new WebSocket('ws://orinb.lab.local:30000/video');
+geai// Établir une connexion WebSocket avec le serveur.
+const socket = new WebSocket('ws://edgeai.lab.local:30000/video');
 
 // Écouter l'événement 'message' qui est émis lorsque le serveur envoie un message.
 socket.addEventListener('message', function (event) {
