@@ -1,6 +1,6 @@
 # Use an official Python runtime as a parent image
-#FROM quay.io/hgeaydem/ubi9-jp6-pytorch:pytorch-2.1.0
-FROM fedora:38
+FROM quay.io/hgeaydem/ubi9-jp6-pytorch:pytorch-2.1.0
+#FROM fedora:38
 
 # Set the working directory to /app
 
