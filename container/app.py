@@ -38,8 +38,6 @@ try:
 except:
     print("MQTT Error", file=sys.stdout)
 
-client.loop_forever()
-
 mqclient.subscribe("/cam/index")
 
 external_host = os.environ.get("EXTERNAL_HOST")
@@ -105,9 +103,11 @@ def get_video_frames():
             if frame_counter == 60:
                 if bad_pins == True:
                     #send KeyError
+                    client.publish("cam/state", payload="bad", qos=1)
                     print("BadPin", file=sys.stdout)
                 else:
                     #send ok
+                    client.publish("cam/state", payload="good", qos=1)
                     print("GoodPin", file=sys.stdout)
                 frame_counter = 0
                 bad_pins = False
