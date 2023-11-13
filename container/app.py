@@ -1,6 +1,6 @@
 import cv2
 import base64
-import io
+import io, os
 import numpy as np
 from flask_socketio import emit, SocketIO
 from flask import Flask, render_template
@@ -8,18 +8,40 @@ import sys
 import time
 import torch
 import paho.mqtt.publish as publish
+import paho.mqtt.client as mqtt
+
+# MQTT broker configuration
+mqtt_broker = "192.168.10.107"
+mqtt_port = 1883
+mqtt_topic = "/cam/state"
+mqtt_username = "your_username"
+mqtt_password = "your_password"
+camera_move = False
 
 
-import os
+client = mqtt.Client("orin_frame_reader") 
+client.on_connect = on_connect 
+client.on_message = on_message 
+client.connect(mqtt_broker, mqtt_port)
+client.subscribe("/cam/state")  
+client.loop_forever()
+
+
+def on_connect(client, userdata, flags, rc):  # The callback for when 
+    the client connects to the broker print("Connected with result code {0}".format(str(rc)))  
+
+def on_message(client, userdata, msg):  
+    # The callback for when a PUBLISH message is received from the server. 
+    print("Message received-> "  + msg.topic + " " + str(msg.payload))
+    if msg.topic == "/cam/state" and str(msg.payload) == "next":
+        camera_move = True
+
+
 
 external_host = os.environ.get("EXTERNAL_HOST")
 external_port = os.environ.get("EXTERNAL_PORT")
 
-# MQTT broker configuration
-mqtt_broker = "mqtt.eclipse.org"
-mqtt_topic = "video_frames"
-mqtt_username = "your_username"
-mqtt_password = "your_password"
+
 
 
 model = torch.hub.load('yolov5', 'custom', path='best.pt', source='local')
@@ -50,14 +72,15 @@ def get_video_frames():
     #print(fps)
     #print(cap.get(cv2.CAP_PROP_FRAME_COUNT), file=sys.stdout)
     frame_counter= 0
-   
+    frame_result_counter=0
 
 
     while True:
-        #time.sleep((1000/fps)/1000)
         # Read a frame from the camera
         ret, frame = cap.read()
         frame_counter += 1
+        frame_result_counter += 1
+        bad_pins=False
         #If the last frame is reached, reset the capture and the frame_counter
         if frame_counter == cap.get(cv2.CAP_PROP_FRAME_COUNT):
             #print("== last frame ==", file=sys.stdout)
@@ -67,16 +90,32 @@ def get_video_frames():
             #print("Error: Could not read a frame.", file=sys.stdout)
             sys.exit
 
-        resized = cv2.resize(frame, dim, interpolation = cv2.INTER_AREA)
-        results = model(resized)
-        if results.pandas().xyxy[0].empty:
-            pass
+        if camera_move == False:
+            resized = cv2.resize(frame, dim, interpolation = cv2.INTER_AREA)
+            results = model(resized)
+            if results.pandas().xyxy[0].empty:
+                pass
+            else:
+                for i in results.pandas().xyxy[0]['name']:
+                    print(i, file=sys.stdout)
+                    if i == "PaintLeak":
+                        bad_pins=True
+            
+            if frame_counter == 60:
+                if bad_pins == True:
+                    send KeyError
+                else:
+                    send ok
+                frame_counter = 0
+                bad_pins = False
+                time.sleep(1)
+                    
+            #results.print()
+            results_resized = cv2.resize(np.squeeze(results.render()), dim_show, interpolation = cv2.INTER_AREA)
         else:
-            for i in results.pandas().xyxy[0]['name']:
-                print(i, file=sys.stdout)
-        #results.print()
-        results_resized = cv2.resize(np.squeeze(results.render()), dim_show, interpolation = cv2.INTER_AREA)
-        #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            results_resized = frame    
+            
+            #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         frame_bytes = cv2.imencode('.jpg', results_resized)[1]
         stringData = base64.b64encode(frame_bytes).decode('utf-8')
         b64_src = 'data:image/jpeg;base64,'
@@ -86,8 +125,8 @@ def get_video_frames():
 def send_frame_to_mqtt(frame_bytes):
     try:
         # Publish the frame as a message to the MQTT broker
-        auth = {'username': mqtt_username, 'password': mqtt_password}
-        publish.single(mqtt_topic, payload=frame_bytes, hostname=mqtt_broker, auth=auth)
+        #auth = {'username': mqtt_username, 'password': mqtt_password}
+        publish.single(mqtt_topic, payload=frame_bytes, hostname=mqtt_broker) #, auth=auth
     except Exception as e:
         print(f"Error sending frame to MQTT broker: {e}")
 
