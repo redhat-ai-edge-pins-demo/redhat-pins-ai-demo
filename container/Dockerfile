@@ -9,7 +9,7 @@ WORKDIR /app
 RUN rm -fr ~/.cache/pip
 
 # Install any dependencies you may need (e.g., OpenCV)
-RUN dnf install -y python3-pip python3-devel mesa-libGL git gcc g++ libjpeg libpng libjpeg-devel libpng-devel v4l-utils libv4l conda
+#RUN dnf install -y python3-pip python3-devel mesa-libGL git gcc g++ libjpeg libpng libjpeg-devel libpng-devel v4l-utils libv4l conda
 RUN git clone https://github.com/ultralytics/yolov5
 RUN git config --global --add safe.directory /app/yolov5
 RUN pip install websockets flask-socketio dill  torchvision==0.16 paho-mqtt
