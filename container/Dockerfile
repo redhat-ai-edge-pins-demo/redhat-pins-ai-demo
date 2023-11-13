@@ -12,7 +12,7 @@ RUN rm -fr ~/.cache/pip
 RUN dnf install -y python3-pip python3-devel mesa-libGL git gcc g++ libjpeg libpng libjpeg-devel libpng-devel v4l-utils libv4l conda
 RUN git clone https://github.com/ultralytics/yolov5
 RUN git config --global --add safe.directory /app/yolov5
-RUN pip install websockets flask-socketio dill  torchvision==0.16
+RUN pip install websockets flask-socketio dill  torchvision==0.16 paho-mqtt
 RUN sed -i 's/opencv-python/opencv-python-headless/g' yolov5/requirements.txt &&  sed -i 's/torch/#torch/g' yolov5/requirements.txt &&  pip install -r yolov5/requirements.txt
 
 # Copy the current directory contents into the container at /app
