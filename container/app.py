@@ -55,7 +55,7 @@ dim = (640, 640)
 dim_show = (1280, 720)
 
 def get_video_frames():
-    #print("START", file=sys.stdout)
+    print("START", file=sys.stdout)
 
     
     if cv2.VideoCapture(1).isOpened():
@@ -65,12 +65,12 @@ def get_video_frames():
     elif cv2.VideoCapture('video.mp4').isOpened():
         cap = cv2.VideoCapture('video.mp4')
     else:
-        #print("No video opened", file=sys.stdout)
+        print("No video opened", file=sys.stdout)
         sys.exit()
 
     fps = cap.get(cv2.CAP_PROP_FPS)
-    #print(fps)
-    #print(cap.get(cv2.CAP_PROP_FRAME_COUNT), file=sys.stdout)
+    print(fps)
+    print(cap.get(cv2.CAP_PROP_FRAME_COUNT), file=sys.stdout)
     frame_counter= 0
     frame_result_counter=0
 
@@ -150,4 +150,5 @@ def index():
 
 if __name__ == "__main__":
     task = sio.start_background_task(get_video_frames)
+    #task_mqtt = sio.start_background_task()
     sio.run(app, host="0.0.0.0", port=5000, debug=False, allow_unsafe_werkzeug=True )
