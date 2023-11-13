@@ -18,17 +18,9 @@ mqtt_username = "your_username"
 mqtt_password = "your_password"
 camera_move = False
 
-
-client = mqtt.Client("orin_frame_reader") 
-client.on_connect = on_connect 
-client.on_message = on_message 
-client.connect(mqtt_broker, mqtt_port)
-client.subscribe("/cam/state")  
-client.loop_forever()
-
-
-def on_connect(client, userdata, flags, rc):  # The callback for when 
-    the client connects to the broker print("Connected with result code {0}".format(str(rc)))  
+def on_connect(client, userdata, flags, rc):  
+    # The callback for when the client connects to the broker 
+    print("Connected with result code {0}".format(str(rc)))  
 
 def on_message(client, userdata, msg):  
     # The callback for when a PUBLISH message is received from the server. 
@@ -36,13 +28,18 @@ def on_message(client, userdata, msg):
     if msg.topic == "/cam/state" and str(msg.payload) == "next":
         camera_move = True
 
+mqclient = mqtt.Client("orin_frame_reader") 
+mqclient.on_connect = on_connect 
+mqclient.on_message = on_message 
+try:
+    mqclient.connect(mqtt_broker, mqtt_port)
+    mqclient.subscribe("/cam/state")  
+except:
+    pass
 
 
 external_host = os.environ.get("EXTERNAL_HOST")
 external_port = os.environ.get("EXTERNAL_PORT")
-
-
-
 
 model = torch.hub.load('yolov5', 'custom', path='best.pt', source='local')
 
@@ -103,9 +100,11 @@ def get_video_frames():
             
             if frame_counter == 60:
                 if bad_pins == True:
-                    send KeyError
+                    #send KeyError
+                    print("BadPin", file=sys.stdout)
                 else:
-                    send ok
+                    #send ok
+                    print("GoodPin", file=sys.stdout)
                 frame_counter = 0
                 bad_pins = False
                 time.sleep(1)
@@ -150,5 +149,5 @@ def index():
 
 if __name__ == "__main__":
     task = sio.start_background_task(get_video_frames)
-    #task_mqtt = sio.start_background_task()
+    task_mqtt = sio.start_background_task(mqclient.loop_forever())
     sio.run(app, host="0.0.0.0", port=5000, debug=False, allow_unsafe_werkzeug=True )
