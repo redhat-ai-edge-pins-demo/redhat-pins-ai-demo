@@ -7,6 +7,7 @@ from flask import Flask, render_template
 import sys
 import time
 import torch
+import paho.mqtt.publish as publish
 
 
 import os
@@ -14,6 +15,11 @@ import os
 external_host = os.environ.get("EXTERNAL_HOST")
 external_port = os.environ.get("EXTERNAL_PORT")
 
+# MQTT broker configuration
+mqtt_broker = "mqtt.eclipse.org"
+mqtt_topic = "video_frames"
+mqtt_username = "your_username"
+mqtt_password = "your_password"
 
 
 model = torch.hub.load('yolov5', 'custom', path='best.pt', source='local')
@@ -76,6 +82,14 @@ def get_video_frames():
         b64_src = 'data:image/jpeg;base64,'
         stringData = b64_src + stringData
         sio.emit('response_back', stringData, namespace="/")
+
+def send_frame_to_mqtt(frame_bytes):
+    try:
+        # Publish the frame as a message to the MQTT broker
+        auth = {'username': mqtt_username, 'password': mqtt_password}
+        publish.single(mqtt_topic, payload=frame_bytes, hostname=mqtt_broker, auth=auth)
+    except Exception as e:
+        print(f"Error sending frame to MQTT broker: {e}")
 
 @sio.on('connect')
 def connect():
