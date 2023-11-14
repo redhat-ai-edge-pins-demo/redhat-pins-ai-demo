@@ -38,7 +38,7 @@ try:
 except:
     print("MQTT Error", file=sys.stdout)
 
-mqclient.subscribe("/cam/index")
+client.subscribe("/cam/index")
 
 external_host = os.environ.get("EXTERNAL_HOST")
 external_port = os.environ.get("EXTERNAL_PORT")
