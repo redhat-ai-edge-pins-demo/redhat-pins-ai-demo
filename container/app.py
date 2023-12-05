@@ -8,8 +8,6 @@ import sys
 import time
 import torch
 
-client.subscribe("/cam/index")
-
 external_host = os.environ.get("EXTERNAL_HOST")
 external_port = os.environ.get("EXTERNAL_PORT")
 
