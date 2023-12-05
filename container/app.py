@@ -19,7 +19,7 @@ app.secret_key = 'Shadowman42'
 sio = SocketIO(app)
 
 dim = (640, 640)
-dim_show = (1280, 720)
+dim_show = (640, 360)
 
 def get_video_frames():
     print("START", file=sys.stdout)
@@ -58,7 +58,7 @@ def get_video_frames():
         resized = cv2.resize(frame, dim, interpolation = cv2.INTER_AREA)
         results = model(resized)
         if results.pandas().xyxy[0].empty:
-            results_resized = frame
+            results_resized = cv2.resize(frame, dim_show, interpolation = cv2.INTER_AREA)
         else:
             results.print()
             results_resized = cv2.resize(np.squeeze(results.render()), dim_show, interpolation = cv2.INTER_AREA)
