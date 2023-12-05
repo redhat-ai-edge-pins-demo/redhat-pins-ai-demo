@@ -58,7 +58,7 @@ def get_video_frames():
         resized = cv2.resize(frame, dim, interpolation = cv2.INTER_AREA)
         results = model(resized)
         if results.pandas().xyxy[0].empty:
-            results_resized = resized
+            results_resized = frame
         else:
             results.print()
             results_resized = cv2.resize(np.squeeze(results.render()), dim_show, interpolation = cv2.INTER_AREA)
