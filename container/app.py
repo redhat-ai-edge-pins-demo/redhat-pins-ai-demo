@@ -58,14 +58,14 @@ def get_video_frames():
         resized = cv2.resize(frame, dim, interpolation = cv2.INTER_AREA)
         results = model(resized)
         if results.pandas().xyxy[0].empty:
-            results_resized = cv2.resize(frame, dim_show, interpolation = cv2.INTER_AREA)
+            results_show = cv2.resize(frame, dim_show, interpolation = cv2.INTER_AREA)
         else:
             results.print()
-            results_resized = cv2.resize(np.squeeze(results.render()), dim_show, interpolation = cv2.INTER_AREA)
+            results_show = cv2.resize(np.squeeze(results.render()), dim_show, interpolation = cv2.INTER_AREA)
 
             
         #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        frame_bytes = cv2.imencode('.jpg', results_resized)[1]
+        frame_bytes = cv2.imencode('.jpg', results_show)[1]
         stringData = base64.b64encode(frame_bytes).decode('utf-8')
         b64_src = 'data:image/jpeg;base64,'
         stringData = b64_src + stringData
