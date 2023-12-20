@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 3
+names: ['Hatband', 'Paint_Leak', 'RedHatPin']
+
+roboflow:
+  workspace: redhat
+  project: red-hat-pins
+  version: 2
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/redhat/red-hat-pins/dataset/2
