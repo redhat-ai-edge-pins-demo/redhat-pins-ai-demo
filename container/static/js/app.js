@@ -1,5 +1,5 @@
-geai// Établir une connexion WebSocket avec le serveur.
-const socket = new WebSocket('ws://orin.lab.local:30000/video');
+// Établir une connexion WebSocket avec le serveur.
+const socket = new WebSocket('ws://pins-redhat.local:30000/video');
 
 // Écouter l'événement 'message' qui est émis lorsque le serveur envoie un message.
 socket.addEventListener('message', function (event) {
@@ -16,4 +16,3 @@ socket.addEventListener('error', function (error) {
 socket.addEventListener('close', function () {
     console.log('WebSocket connection closed.');
 });
-
