@@ -21,7 +21,7 @@ ADD video.mp4 /app/
 ADD templates /app/templates
 ADD static /app/static
 COPY app.py /app/
-COPY pins.pt /app/
+COPY best.pt /app/
 
 RUN curl -OL  https://github.com/redhat-ai-edge-pins-demo/pins-model/raw/main/pins.pt
 
