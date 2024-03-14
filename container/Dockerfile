@@ -21,7 +21,7 @@ ADD video.mp4 /app/
 ADD templates /app/templates
 ADD static /app/static
 COPY app.py /app/
-curl -o best.pt --insecure https://minio-api-pins-demo.apps.karbon804.dherouville.home/pins-demo/best.pt
+RUN curl -o best.pt --insecure https://minio-api-pins-demo.apps.karbon804.dherouville.home/pins-demo/best.pt
 #COPY best.pt /app/
 #RUN curl -OL  https://github.com/redhat-ai-edge-pins-demo/pins-model/raw/main/pins.pt
 
