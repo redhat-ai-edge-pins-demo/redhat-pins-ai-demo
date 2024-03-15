@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM quay.io/hgeaydem/ubi9-jp6-pytorch:pytorch-2.1.0
+FROM dustynv/l4t-tensorflow:tf2-r36.2.0
 #FROM fedora:38
 
 # Set the working directory to /app
